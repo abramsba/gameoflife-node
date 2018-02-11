@@ -13,7 +13,6 @@ for( var i = 1; i < bits; i *= 2 ) {
 grid[4] = 0;
 grid[5] = 0;
 grid[6] = 0;
-
 /*
  * Checks the row above and below the current row
  * g = grid
@@ -64,7 +63,7 @@ function checkRow( g, ri ) {
   var new_row = 0;
   // If nothing around it is alive, return 0;
   if ( above_status > 0 || below_status > 0 || curr_status > 0 ) {
-    // Check the positions 
+    // Check the positions
     for( var i = 1; i < bits; i *= 2 ) {
       var alive_or_dead = (g[ri]&i)>0;
       var ac = 0;
@@ -81,7 +80,7 @@ function checkRow( g, ri ) {
         (g[ri+1] & (i/2))>0?ac++:false;
         (g[ri+1] & (i/1))>0?ac++:false;
         (g[ri+1] & (i*2))>0?ac++:false;
-      } 
+      }
       if ( alive_or_dead == true && ( ac == 2 || ac == 3 ) ) {
         new_row += bits & i;
       }
@@ -109,12 +108,12 @@ function iterate( g ) {
 }
 
 function run() {
-  console.log('\033[2J'); 
+  console.log('\033[2J');
   var start = new Date();
   printBoard( grid, checks );
   grid = iterate(grid);
   var finished = new Date();
-  console.log( "\tDuration: ", 
+  console.log( "\tDuration: ",
       (finished.getMilliseconds()-start.getMilliseconds())+"ms" );
   setTimeout( run, 200 );
 }
